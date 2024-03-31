@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables} from 'chart.js';
 import { MasterService } from '../service/master.service';
-import { TablecastComponent } from '../tablecast/tablecast.component';
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-forecast',
   standalone: true,
-  imports: [TablecastComponent],
+  imports: [],
   templateUrl: './forecast.component.html',
   styleUrl: './forecast.component.css'
 })
 
-export class ForecastComponent implements OnInit {
+export class Forecast2Component implements OnInit {
 constructor(private service:MasterService){}
 
   data:any;

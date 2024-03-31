@@ -1,0 +1,29 @@
+
+  <mat-toolbar color="primary">
+    <button
+      type="button"
+      aria-label="Toggle sidenav"
+      mat-icon-button
+      (click)="drawer.toggle()">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+    <span class="title">Site Information System</span>
+  </mat-toolbar>
+  
+  <mat-sidenav-container class="sidenav-container" autosize>
+    <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'">
+      <mat-toolbar ><div class="menuTitle">Menu</div></mat-toolbar>
+      <mat-nav-list class="custom-nav-list">
+        <mat-chip-listbox  class="mat-mdc-chip-set-stacked" aria-label="">
+          <mat-chip-option (click)="onClick('/LWX')">Columbia Forecast</mat-chip-option>
+          <mat-chip-option (click)="onClick('/TOP')" selected>Kansas Forecast</mat-chip-option>
+        </mat-chip-listbox>
+      </mat-nav-list>
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
