@@ -11,6 +11,10 @@ export class MasterService {
     return this.listarray;
   }
   Getchartinfo(){
+    return this.http.get("https://api.weather.gov/gridpoints/LWX/31,80/forecast");
+  }
+
+  Getchartinfo2(){
     return this.http.get("https://api.weather.gov/gridpoints/TOP/31,80/forecast");
   }
 }

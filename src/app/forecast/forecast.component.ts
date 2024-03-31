@@ -71,10 +71,10 @@ constructor(private service:MasterService){}
   const data = {
     labels: this.labeldata,
     datasets: [{
-      label: 'temperatures in TOP',
+      label: 'temperatures in LWX',
       data: temperatures,
       fill: false,
-      borderColor: 'rgb(75, 192, 192)',
+      borderColor: 'rgb(253, 253, 253)',
       tension: 0.1
     }]
   };

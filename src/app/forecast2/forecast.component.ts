@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables} from 'chart.js';
 import { MasterService } from '../service/master.service';
+import { TablecastComponent } from '../tablecast2/tablecast.component';
+
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-forecast',
   standalone: true,
-  imports: [],
+  imports: [TablecastComponent],
   templateUrl: './forecast.component.html',
   styleUrl: './forecast.component.css'
 })
@@ -24,8 +26,8 @@ constructor(private service:MasterService){}
  }
  fetchPosts(){
   
-  this.service.Getchartinfo().subscribe((data:any)=>{
-    this.service.Getchartinfo().subscribe(
+  this.service.Getchartinfo2().subscribe((data:any)=>{
+    this.service.Getchartinfo2().subscribe(
       (data: any) => {
         console.log(data);
         this.processData(data);
@@ -73,7 +75,7 @@ constructor(private service:MasterService){}
       label: 'temperatures in TOP',
       data: temperatures,
       fill: false,
-      borderColor: 'rgb(75, 192, 192)',
+      borderColor: 'rgb(253, 253, 253)',
       tension: 0.1
     }]
   };

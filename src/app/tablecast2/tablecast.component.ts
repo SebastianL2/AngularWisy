@@ -44,7 +44,7 @@ export class TablecastComponent implements AfterViewInit,OnInit{
   }
 
   fetchPosts(){
-    this.service.Getchartinfo().subscribe((data: any) => {
+    this.service.Getchartinfo2().subscribe((data: any) => {
       this.dataSource.data = data.properties.periods;
     });
    }
