@@ -4,7 +4,7 @@
 }
 
 .content {
-  display: flex; /* Utiliza flexbox para organizar los elementos */
+  display: flex;
 }
 
 .table {
@@ -14,8 +14,18 @@
 }
 
 .canvas {
-  flex: 1; /* El canvas ocupará el espacio disponible */
-  max-width: 50%; /* El canvas ocupará la mitad del contenedor */
+  flex: 1;
+  max-width: 50%;
   max-height: 400px;
-  
+}
+
+@media screen and (max-width: 768px) {
+  .content {
+    flex-direction: column;
+  }
+
+  .table,
+  .canvas {
+    max-width: 100%;
+  }
 }
