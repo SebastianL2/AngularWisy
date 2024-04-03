@@ -78,9 +78,54 @@ constructor(private service:MasterService){}
       tension: 0.1
     }]
   };
-  const myChart = new Chart("doughnut", {
+  const precipitationData = this.data.properties.periods.map((period: any) => period.probabilityOfPrecipitation);
+  function classifyPrecipitation(data: number[]) {
+    let lessThan50: number[] = [];
+    let greaterThan50: number[] = [];
+    let greaterThan80: number[] = [];
+  
+    data.forEach(probability => {
+      if (probability < 50) {
+        lessThan50.push(probability);
+      } else if (probability >= 50 && probability < 80) {
+        greaterThan50.push(probability);
+      } else if (probability >= 80) {
+        greaterThan80.push(probability);
+      }
+    });
+  
+    return {
+      "Menor a 50%": lessThan50.length,
+      "Mayor a 50% y menor a 80%": greaterThan50.length,
+      "Mayor a 80%": greaterThan80.length
+    };
+  }
+  const classifiedPrecipitation = classifyPrecipitation(precipitationData);
+  const data2 = {
+    labels: ["Menor a 50%", "Mayor a 50% y menor a 80%", "Mayor a 80%"],
+    datasets: [{
+      label: 'Cantidad de períodos',
+      data: [
+        classifiedPrecipitation["Menor a 50%"],
+        classifiedPrecipitation["Mayor a 50% y menor a 80%"],
+        classifiedPrecipitation["Mayor a 80%"]
+      ],
+      backgroundColor: [
+        'rgb(255, 99, 132)',
+        'rgb(54, 162, 235)',
+        'rgb(255, 205, 86)'
+      ],
+      hoverOffset: 4
+    }]
+  };
+  const myChart = new Chart("line", {
     type: 'line',
     data: data,
+  });
+
+  const myChart2 = new Chart("doughnut", {
+    type: 'doughnut',
+    data: data2,
   });
  }
 }

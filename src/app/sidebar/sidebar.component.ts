@@ -10,6 +10,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'; 
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router'; 
 
 @Component({
   selector: 'app-sidebar',
@@ -20,14 +21,17 @@ import { CommonModule } from '@angular/common';
 })
 export class SidebarComponent {
   showFiller: boolean = false; 
-
+  selectedRoute: string = '/LWX'; 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(result => result.matches)
   );
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver,private router: Router) {}
   onClick(rute: string)
   {
-    window.location.href = rute;
+    this.selectedRoute = rute;
+
+    // Navega a la ruta correspondiente utilizando Angular Router
+    this.router.navigate([rute]);
 
   }
 }
