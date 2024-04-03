@@ -123,9 +123,5 @@ constructor(private service:MasterService){}
     data: data,
   });
 
-  const myChart2 = new Chart("doughnut", {
-    type: 'doughnut',
-    data: data2,
-  });
  }
 }
