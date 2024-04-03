@@ -14,7 +14,16 @@
     <mat-sidenav #drawer class="sidenav" fixedInViewport
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'">
-      <mat-toolbar ><div class="menuTitle">Menu</div></mat-toolbar>
+      <mat-toolbar >
+        <div class="menuTitle">Menu</div> 
+        <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      </mat-toolbar>
       <mat-nav-list class="custom-nav-list">
         <mat-chip-listbox  class="mat-mdc-chip-set-stacked" aria-label="">
           <mat-chip-option (click)="onClick('/LWX')" [ngClass]="{ 'selected': selectedRoute === '/LWX' }">Columbia Forecast</mat-chip-option>
