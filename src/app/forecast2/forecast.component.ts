@@ -72,16 +72,62 @@ constructor(private service:MasterService){}
   const data = {
     labels: this.labeldata,
     datasets: [{
-      label: 'temperatures in TOP',
+      label: 'temperatures in LWX',
       data: temperatures,
       fill: false,
       borderColor: 'rgb(253, 253, 253)',
       tension: 0.1
     }]
   };
-  const myChart = new Chart("doughnut", {
+  const precipitationData = this.data.properties.periods.map((period: any) => period.probabilityOfPrecipitation.value);
+  function classifyPrecipitation(data: number[]) {
+    let lessThan50: number[] = [];
+    let greaterThan50: number[] = [];
+    let greaterThan80: number[] = [];
+  
+    data.forEach(probability => {
+      if (probability < 50) {
+        lessThan50.push(probability);
+      } else if (probability >= 50 && probability < 80) {
+        greaterThan50.push(probability);
+      } else if (probability >= 80) {
+        greaterThan80.push(probability);
+      }
+    });
+  
+    return {
+      "Less than 50%": lessThan50.length,
+      "Greater than 50% and less than 80%": greaterThan50.length,
+      "Greater than 80%": greaterThan80.length
+    };
+  }
+  const classifiedPrecipitation = classifyPrecipitation(precipitationData);
+  const data2 = {
+    labels: ["Less than 50%", "Greater than 50% and less than 80%", "Greater than 80%"],
+    datasets: [{
+      label: 'Number of days with probability of precipitation',
+      data: [
+        classifiedPrecipitation["Less than 50%"],
+        classifiedPrecipitation["Greater than 50% and less than 80%"],
+        classifiedPrecipitation["Greater than 80%"]
+        
+      ],
+      backgroundColor: [
+        'white',
+        'rgb(54, 162, 235)',
+        'gray'
+      ],
+      hoverOffset: 4
+    }]
+  };
+  const myChart = new Chart("line", {
     type: 'line',
     data: data,
+  });
+
+  const myChart2 = new Chart("doughnut", {
+    type: 'doughnut',
+    data: data2,
   });
  }
 }

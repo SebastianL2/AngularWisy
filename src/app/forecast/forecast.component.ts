@@ -78,7 +78,7 @@ constructor(private service:MasterService){}
       tension: 0.1
     }]
   };
-  const precipitationData = this.data.properties.periods.map((period: any) => period.probabilityOfPrecipitation);
+  const precipitationData = this.data.properties.periods.map((period: any) => period.probabilityOfPrecipitation.value);
   function classifyPrecipitation(data: number[]) {
     let lessThan50: number[] = [];
     let greaterThan50: number[] = [];
@@ -95,25 +95,26 @@ constructor(private service:MasterService){}
     });
   
     return {
-      "Menor a 50%": lessThan50.length,
-      "Mayor a 50% y menor a 80%": greaterThan50.length,
-      "Mayor a 80%": greaterThan80.length
+      "Less than 50%": lessThan50.length,
+      "Greater than 50% and less than 80%": greaterThan50.length,
+      "Greater than 80%": greaterThan80.length
     };
   }
   const classifiedPrecipitation = classifyPrecipitation(precipitationData);
   const data2 = {
-    labels: ["Menor a 50%", "Mayor a 50% y menor a 80%", "Mayor a 80%"],
+    labels: ["Less than 50%", "Greater than 50% and less than 80%", "Greater than 80%"],
     datasets: [{
-      label: 'Cantidad de períodos',
+      label: 'Number of days with probability of precipitation',
       data: [
-        classifiedPrecipitation["Menor a 50%"],
-        classifiedPrecipitation["Mayor a 50% y menor a 80%"],
-        classifiedPrecipitation["Mayor a 80%"]
+        classifiedPrecipitation["Less than 50%"],
+        classifiedPrecipitation["Greater than 50% and less than 80%"],
+        classifiedPrecipitation["Greater than 80%"]
+        
       ],
       backgroundColor: [
-        'rgb(255, 99, 132)',
+        'white',
         'rgb(54, 162, 235)',
-        'rgb(255, 205, 86)'
+        'gray'
       ],
       hoverOffset: 4
     }]
@@ -123,5 +124,9 @@ constructor(private service:MasterService){}
     data: data,
   });
 
+  const myChart2 = new Chart("doughnut", {
+    type: 'doughnut',
+    data: data2,
+  });
  }
 }
