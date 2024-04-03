@@ -123,11 +123,39 @@ constructor(private service:MasterService){}
   const myChart = new Chart("line", {
     type: 'line',
     data: data,
+    options: {
+      plugins: {
+          title: {
+              display: true,
+              text: 'The temperatures forecasted in Kansas ',
+              color: 'white',
+              font:{
+              size:20
+              },
+          }
+      }
+    }
   });
 
   const myChart2 = new Chart("doughnut", {
     type: 'doughnut',
     data: data2,
+    options: {
+      plugins: {
+          title: {
+              display: true,
+              text: 'Number of days with probability of precipitation Kansas',
+              color: 'white',
+              font:{
+              size:25
+              },
+              padding: {
+                  top: 0,
+                  bottom: 30
+              }
+          }
+      }
+    }
   });
  }
 }

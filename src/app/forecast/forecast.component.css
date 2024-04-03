@@ -18,11 +18,13 @@
   align-items: center;
   height: 100vh; /* Esto es opcional, ajusta la altura según tus necesidades */
 }
+
 .canvas {
   flex: 1;
   max-width: 50%;
   max-height: 400px;
 }
+
 
 @media screen and (max-width: 768px) {
   .content {
