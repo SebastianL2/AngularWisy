@@ -28,7 +28,7 @@ constructor(private service:MasterService){}
   this.service.Getchartinfo().subscribe((data:any)=>{
     this.service.Getchartinfo().subscribe(
       (data: any) => {
-        console.log(data);
+        
         this.processData(data);
         this.RenderChart(); 
       },
